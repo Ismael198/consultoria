@@ -1,0 +1,46 @@
+{% extends "base_dashboard.html" %}
+{% block title %}Editar Perfil{% endblock %}
+{% load static %}
+{% block content_dash %}
+<div class="row">
+    <div class="col-md-8">
+        <form class="row p-4 rounded-3 shadow-sm bg-white" method="post" action="?" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h4 class="mb-3">Editar Informações Pessoais</h4>
+            <p class="text-muted">Perfil de <strong>{{ obj.username }}</strong></p>
+
+            <!-- Exibição da imagem do perfil -->
+            <div class="col-md-4 mb-3 text-center">
+                {% if obj.perfil.foto %}
+                <img src="{{ obj.perfil.foto.url }}" class="img-fluid rounded-circle" alt="{{ obj.username }}" width="150" height="150">
+                {% endif %} <!-- Adicionei o fechamento do if aqui -->
+            </div>
+
+            <!-- Campos de informações pessoais -->
+            <div class="col-md-8">
+                <h5 class="mb-3">Informações Pessoais</h5>
+                <div class="mb-3">
+                    {{ form_perfil.as_p }}
+                </div>
+            </div>
+
+            <!-- Campos de informações da conta -->
+            <div class="col-md-12">
+                <h5 class="mb-3">Informações da Conta</h5>
+                <div class="mb-3">
+                    {{ form_contas.as_p }}
+                </div>
+            </div>
+
+            <!-- Botões de ação -->
+            <div class="col-md-12 text-end">
+                <input type="hidden" name="redirect_route" value="{{ request.path }}">
+                <button type="submit" class="btn btn-primary me-2">Salvar</button>
+
+                <!-- Botão Cancelar redireciona para a página anterior -->
+                <a href="javascript:history.back()" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

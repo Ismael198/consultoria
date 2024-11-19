@@ -1,0 +1,60 @@
+{% if bloco.bloco.nome == 'CONTATO' %}
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center mb-4">
+            <div class="col-md-8 text-center">
+                <h2 class="display-5 mb-4">{{ bloco.titulo }}</h2>
+            </div>
+        </div>
+
+        <div class="row mb-5 text-center">
+            {% for contato in bloco.conteudo.all %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body">
+                        <i class="{{ contato.icone }} fa-4x text-secondary mb-3"></i>
+                        <h5 class="card-title">{{ contato.titulo_1 }}</h5>
+                        <p>
+                            <a class="link-dark text-decoration-none" href="{{ contato.rota_botao_1 }}">
+                                {{ contato.titulo_2 }}
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="row g-4 align-items-center">
+            <div class="col-md-6">
+                {% for contato in bloco.conteudo.all %}
+                {% if forloop.first %}
+                <img src="{{ contato.imagem.url }}" class="img-fluid rounded shadow" alt="Contato">
+                {% endif %}
+                {% endfor %}
+            </div>
+
+            <div class="col-md-6">
+                <form class="bg-light p-4 shadow rounded" action="#">
+                    <h4 class="mb-4">Formulário de Contato</h4>
+                    <div class="mb-3">
+                        <input type="text" class="form-control" placeholder="Seu nome" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="email" class="form-control" placeholder="Seu E-mail" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" class="form-control" placeholder="Assunto" required>
+                    </div>
+                    <div class="mb-3">
+                        <textarea name="" id="" cols="30" rows="5" class="form-control" placeholder="Mensagem..." required></textarea>
+                    </div>
+                    <div class="text-end">
+                        <button type="submit" class="btn btn-primary py-2 px-4">Enviar Mensagem</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}

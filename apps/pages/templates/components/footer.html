@@ -1,0 +1,49 @@
+{% if bloco.bloco.nome == 'FOOTER' %}
+<section style="background-color: #f8f9fa;">
+    <div class="container">
+        <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-4 py-5 my-5 border-top text-center text-md-start">
+            {% for footer in bloco.conteudo.all %}
+            <div class="col mb-3 {% if forloop.first %}col-md-3{% endif %}">
+                {% if footer.imagem %}
+                <img src="{{ footer.imagem.url }}" alt="Logo da seção {{ footer.id }}" width="150" class="mb-3">
+                {% endif %}
+                <h5 class="text-uppercase">{{ footer.titulo_1 }}</h5>
+                <ul class="nav flex-column">
+                    {{ footer.descricao_2|safe }}
+                </ul>
+            </div>
+            {% endfor %}
+        </footer>
+    </div>
+
+    <div class="container">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+            <!-- Logo e Informações -->
+            <div class="col-md-4 d-flex align-items-center">
+                <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1" aria-label="Página inicial">
+                    <svg class="bi" width="30" height="24" role="img" aria-label="Bootstrap logo"><use xlink:href="#bootstrap"></use></svg>
+                </a>
+                {% for footer in bloco.conteudo.all %}
+                {% if forloop.first %}
+                <span class="mb-3 mb-md-0 text-body-secondary">{{ footer.descricao_1 }}</span>
+                {% endif %}
+                {% endfor %}
+            </div>
+
+            <!-- Links de Políticas -->
+            <div class="col-md-4 text-center">
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item"><a href="#" class="text-body-secondary">Política de Privacidade</a></li>
+                    <li class="list-inline-item"><a href="#" class="text-body-secondary">Termos de Serviço</a></li>
+                    <li class="list-inline-item"><a href="#" class="text-body-secondary">Contato</a></li>
+                </ul>
+            </div>
+
+            <!-- Direitos Autorais -->
+            <div class="col-md-4 text-end">
+                <span class="text-body-secondary">© 2024 NewGenA. Todos os direitos reservados.</span>
+            </div>
+        </footer>
+    </div>
+</section>
+{% endif %}
